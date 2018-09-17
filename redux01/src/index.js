@@ -12,11 +12,29 @@ function counter(state = 0, action) {
 }
 
 const store = createStore(counter);
+const valueEl = document.getElementById('value');
 
-store.subscribe(() => 
-  console.log(store.getState())
-);
+function render() {
+  valueEl.innerHTML = store.getState();
+}
 
-store.dispatch({ type: 'INCREMENT' });
-store.dispatch({ type: 'INCREMENT' });
-store.dispatch({ type: 'DECREMENT' });
+render();
+store.subscribe(render);
+
+document.getElementById('increment').addEventListener('click', () => {
+  store.dispatch({ type: 'INCREMENT' });
+});
+document.getElementById('decrement').addEventListener('click', () => {
+  store.dispatch({ type: 'DECREMENT' });
+});
+document.getElementById('incrementIfOdd').addEventListener('click', () => {
+  if (store.getState() % 2 !== 0) {
+    store.dispatch({ type: 'INCREMENT' });
+  }
+});
+document.getElementById('incrementAsync').addEventListener('click', () => {
+  setTimeout(() => {
+    store.dispatch({ type: 'INCREMENT' });
+  }, 1000);
+});
+
