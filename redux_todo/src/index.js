@@ -1,5 +1,6 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 
-console.log(createStore);
+// action
+const ADD_TODO = 'ADD_TODO';
+const TOGGLE_TODO = 'TOGGLE_TODO';
+const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
