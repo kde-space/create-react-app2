@@ -1,40 +1,20 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
-
-function counter(state = 0, action) {
-  switch(action.type) {
-    case 'INCREMENT':
-      return state + 1;
-    case 'DECREMENT':
-      return state - 1;
-    default:
-      return state;
-  }
-}
+import Counter from './components/Counter';
+import counter from './reducers';
 
 const store = createStore(counter);
-const valueEl = document.getElementById('value');
+const rootEl = document.getElementById('root');
 
-function render() {
-  valueEl.innerHTML = store.getState();
-}
+const render = () => ReactDOM.render(
+  <Counter
+    value={store.getState()}
+    onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
+    onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
+  />,
+  rootEl
+);
 
 render();
 store.subscribe(render);
-
-document.getElementById('increment').addEventListener('click', () => {
-  store.dispatch({ type: 'INCREMENT' });
-});
-document.getElementById('decrement').addEventListener('click', () => {
-  store.dispatch({ type: 'DECREMENT' });
-});
-document.getElementById('incrementIfOdd').addEventListener('click', () => {
-  if (store.getState() % 2 !== 0) {
-    store.dispatch({ type: 'INCREMENT' });
-  }
-});
-document.getElementById('incrementAsync').addEventListener('click', () => {
-  setTimeout(() => {
-    store.dispatch({ type: 'INCREMENT' });
-  }, 1000);
-});
-
