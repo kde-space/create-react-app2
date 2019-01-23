@@ -17,21 +17,27 @@ export const visibilityFilter = {
 export const addTodo = text => {
   return {
     type: ADD_TODO,
-    text
+    payload: {
+      text
+    }
   };
 };
 
 export const toggleTodo = index => {
   return {
     type: TOGGLE_TODO,
-    index
+    payload: {
+      index
+    }
   };
 };
 
 export const setVisibilityFilter = filter => {
   return {
     type: SET_VISIBILITY_FILTER,
-    filter
+    payload: {
+      filter
+    }
   };
 };
 
