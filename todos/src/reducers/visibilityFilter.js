@@ -3,7 +3,9 @@ import {
   visibilityFilter 
 } from '../actions';
 
-function setVisibilityFilter(state = visibilityFilter.SHOW_ALL, action) {
+const { SHOW_ALL } = visibilityFilter;
+
+function setVisibilityFilter(state = SHOW_ALL, action) {
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
       return action.payload.filter;
