@@ -14,4 +14,4 @@ function setVisibilityFilter(state = SHOW_ALL, action) {
   }
 }
 
-export default setVisibilityFilter
+export default setVisibilityFilter;

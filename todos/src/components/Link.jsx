@@ -1,4 +1,5 @@
 import React from 'react';
+import Hoge from '../containers/Hoge';
 
 const Link = ({ active, children, onClick }) => {
   if (active) {
@@ -12,6 +13,7 @@ const Link = ({ active, children, onClick }) => {
         onClick();
       }}
     >
+      <Hoge />
       {children}
     </a>
   )
