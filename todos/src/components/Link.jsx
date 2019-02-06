@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Link = ({ onSetVisibilityFilter, isMatchFilter, filterName }) => {
-  const Wrapper = isMatchFilter ? 
+const Link = ({ onSetVisibilityFilter, isActive, children }) => {
+  const Wrapper = isActive ? 
   styled.span`
     margin: 5px;
   ` : 
@@ -10,20 +10,20 @@ const Link = ({ onSetVisibilityFilter, isMatchFilter, filterName }) => {
     margin: 5px;
   `;
 
-  if (isMatchFilter) {
-    return <Wrapper>{filterName}</Wrapper>;
+  if (isActive) {
+    return <Wrapper>{children}</Wrapper>;
   }
 
   const handleClick = (e) => {
     e.preventDefault();
-    onSetVisibilityFilter(filterName);
+    onSetVisibilityFilter();
   };
   return (
     <Wrapper 
       href="##"
       onClick={handleClick}
     >
-      {filterName}
+      {children}
     </Wrapper>
   );
 };
