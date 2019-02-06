@@ -2,7 +2,7 @@
 
 ## storeのstate
 
-```
+```js
 {
   todos: [
     {
@@ -21,7 +21,7 @@
 ```
 
 ### visibilityFilterの種類
-- SHOW_ALL (default)
-- SHOW_ACTIVE
-- SHOW_COMPLETED
+- `SHOW_ALL` (default)
+- `SHOW_ACTIVE`
+- `SHOW_COMPLETED`
 
