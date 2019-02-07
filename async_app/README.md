@@ -27,3 +27,13 @@
   }
 }
 ```
+
+## action
+- `REQUEST_POSTS`
+  - サブレディットの投稿を取得
+- `RECEIVE_POSTS`
+  - サブレディットの投稿取得の受け取り
+- `SELECT_SUBREDDIT`
+  - 板の選択
+- `INVALIDATE_SUBREDDIT`
+  - 再読み込み
