@@ -39,4 +39,16 @@ export const receivePosts = (subreddit, json) => ({
   }
 });
 
+export const fetchPosts = (subreddit) => {
+  return (dispatch) => {
+    dispatch(requestPosts(subreddit));
+    return fetch(`https://www.reddit.com/r/${subreddit}.json`)
+      .then(
+        res => res.json(), 
+        error => console.log('An error occurred.', error)
+      )
+      .then(json => dispatch(receivePosts(subreddit, json)));
+  };
+};
+
 
