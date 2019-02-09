@@ -9,7 +9,8 @@ export const SELECT_TAG = 'SELECT_TAG';
 export const REQUEST_TAG_DATA = 'REQUEST_TAG_DATA';
 export const RECEIVE_TAG_DATA = 'RECEIVE_TAG_DATA';
 export const REFRESH_TAG_DATA = 'REFRESH_TAG_DATA';
-export const FAIL_REQUEST = 'FAIL_REQUEST';
+export const FAIL_REQUEST_TAGS = 'FAIL_REQUEST_TAGS';
+export const FAIL_REQUEST_TAG_DATA = 'FAIL_REQUEST_TAG_DATA';
 
 /**
  * Action Creator
@@ -54,10 +55,19 @@ export const refreshTagData = (tag) => ({
   }
 });
 
-export const failRequest = (error) => ({
-  type: FAIL_REQUEST,
+export const failRequestTags = (error) => ({
+  type: FAIL_REQUEST_TAGS,
   error: true,
   payload: {
+    error
+  }
+});
+
+export const failRequestTagData = (tag, error) => ({
+  type: FAIL_REQUEST_TAG_DATA,
+  error: true,
+  payload: {
+    tag,
     error
   }
 });
@@ -73,11 +83,11 @@ export const fetchTags = () => {
         return res.json();
       })
       .then(json => dispatch(receiveTags(json)))
-      .catch(error => dispatch(failRequest(error)));
+      .catch(error => dispatch(failRequestTags(error)));
   }
 };
 
-export const fetchTagData = (tag) => {
+const fetchTagData = (tag) => {
   return (dispatch) => {
     dispatch(requestTagData(tag));
     return fetch(API_QIITA_TAGS + tag)
@@ -88,6 +98,21 @@ export const fetchTagData = (tag) => {
         return res.json();
       })
       .then(json => dispatch(receiveTagData(tag, json)))
-      .catch(error => dispatch(failRequest(error)));
+      .catch(error => dispatch(failRequestTagData(tag, error)));
   }
 }
+
+const shouldFetchTagData = (tag, state) => {
+  if (state.tagDatas[tag] === undefined || state.tagDatas[tag].shouldUpdate) {
+    return true;
+  }
+  return false;
+};
+
+export const fetchTagDataIfNeeded = (tag) => {
+  return (dispatch, getState) => {
+    if (shouldFetchTagData(tag, getState())) {
+      return dispatch(fetchTagData(tag));
+    }
+  }
+};

@@ -3,15 +3,23 @@
 ## state (store)
 ```js
 {
-  tags: ['react', 'vue', 'angular'],
-  selectedTag: 'react',
-  isFetching: false,
-  isError: {
-    status: false,
-    error: null
+  tags: {
+    tagAll: ['react', 'vue', 'angular'],
+    isFetching: false,
+    isError: {
+      status: false,
+      error: null
+    },
+    selectedTag: 'react',
   },
   tagDatas: {
     react: {
+      isFetching: false,
+      isError: {
+        status: false,
+        error: null
+      },
+      shouldUpdate: false,
       lastUpdated: 137983721
       responseData: {
         "followers_count": 298,
@@ -27,12 +35,14 @@
 初期state
 ```js
 {
-  tags: [],
-  selectedTag: '',
-  isFetching: false,
-  isError: {
-    status: false,
-    error: null
+  tags: {
+    tagAll: [],
+    isFetching: false,
+    isError: {
+      status: false,
+      error: null
+    },
+    selectedTag: ''
   },
   tagDatas: {}
 }
@@ -51,3 +61,7 @@
   - タグの詳細情報を受け取り
 - `REFRESH_TAG_DATA`
   - タグの情報を再読み込み
+- `FAIL_REQUEST_TAGS`
+  - タグ一覧のリクエスト失敗
+- `FAIL_REQUEST_TAG_DATA`
+  - タグの詳細情報のリクエスト失敗
