@@ -58,7 +58,7 @@ function tags(state = {
       return {
         ...state,
         tagAll: action.payload.response,
-        isFetching: false
+        isFetching: tagsIsFetching(state.isFetching, action)
       };
     case Actions.SELECT_TAG:
       return {
@@ -68,7 +68,8 @@ function tags(state = {
     case Actions.FAIL_REQUEST_TAGS:
       return {
         ...state,
-        isError: tagsIsError(state.isError, action)
+        isError: tagsIsError(state.isError, action),
+        isFetching: tagsIsFetching(state.isFetching, action)
       };
     default:
       return state;
