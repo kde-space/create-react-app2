@@ -6,7 +6,10 @@
   tags: ['react', 'vue', 'angular'],
   selectedTag: 'react',
   isFetching: false,
-  isError: false,
+  isError: {
+    status: false,
+    error: null
+  },
   tagDatas: {
     react: {
       lastUpdated: 137983721
@@ -27,7 +30,10 @@
   tags: [],
   selectedTag: '',
   isFetching: false,
-  isError: false,
+  isError: {
+    status: false,
+    error: null
+  },
   tagDatas: {}
 }
 ```
