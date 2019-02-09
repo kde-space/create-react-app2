@@ -10,16 +10,20 @@ const Details = ({ followers_count, icon_url, items_count }) => (
 );
 
 const Wrapper = styled.ul`
-  padding: 10px;
+  padding: 0;
+  list-style-type: none;
 `;
 
 const ItemWrapper = styled.li`
-  padding: 10px;
-  &:not(:last-child) {
-    boder-bottom: 1px solid #999;
+  padding: 10px 20px;
+  border-top: 1px solid #ccc;
+  &:last-child {
+    border-bottom: 1px solid #ccc;
   }
 `;
 
-const Img = styled.img``;
+const Img = styled.img`
+  vertical-align: middle;
+`;
 
 export default Details;

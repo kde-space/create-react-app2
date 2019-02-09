@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div>
         <BtnGroup />
-        {/* <TagDetail /> */}
+        <TagDetail />
       </div>
     );
   }

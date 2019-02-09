@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Btn = ({ tag, children, fetchTagDataIfNeeded }) => {
-  const handleClick = () => fetchTagDataIfNeeded(tag);
+const Btn = ({ tag, children, onClick }) => {
+  const handleClick = () => onClick(tag);
   return (
     <Wrapper>
       <ItemWrapper onClick={handleClick}>{children}</ItemWrapper>

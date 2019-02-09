@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Btn from './Btn';
+import {
+  fetchTags,
+  selectTag,
+  fetchTagDataIfNeeded,
+} from '../actions';
 
 class BtnGroup extends Component {
-  componentDidMount() {
-    this.props.fetchTags();
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
   }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchTags());
+  }
+
+  handleClick(tag) {
+    const { dispatch } = this.props;
+    dispatch(selectTag(tag));
+    dispatch(fetchTagDataIfNeeded(tag));
+  }
+
   render() {
-    const { tagAll, isFetching, isError, fetchTagDataIfNeeded } = this.props;
+    const { tagAll, isFetching, isError } = this.props;
     return (
       <Wrapper>
         {isFetching &&
@@ -20,12 +38,11 @@ class BtnGroup extends Component {
           <React.Fragment>
             <ListHead>タグ：</ListHead>
             <ListWrapper>
-              {tagAll.map(tag => <Btn key={tag} tag={tag} fetchTagDataIfNeeded={fetchTagDataIfNeeded}>{tag}</Btn>)}
+              {tagAll.map(tag => <Btn key={tag} tag={tag} onClick={this.handleClick}>{tag}</Btn>)}
             </ListWrapper>
           </React.Fragment>
         }
       </Wrapper>
-
     )
   }
 }

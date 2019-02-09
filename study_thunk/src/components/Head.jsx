@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Head = ({ tag }) => (
   <Wrapper>
-    タグ「{tag}」の詳細情報
+    Qiitaの記事タグ「{tag}」の詳細情報
   </Wrapper>
 );
 

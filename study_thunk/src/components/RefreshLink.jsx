@@ -5,6 +5,8 @@ const RefreshLink = ({ onClick }) => (
   <Wrapper href="#" onClick={onClick}>再読み込み</Wrapper>
 );
 
-const Wrapper = styled.a``;
+const Wrapper = styled.a`
+  font-size: 12px;
+`;
 
 export default RefreshLink;

@@ -106,6 +106,9 @@ const shouldFetchTagData = (tag, state) => {
   if (state.tagDatas[tag] === undefined || state.tagDatas[tag].shouldUpdate) {
     return true;
   }
+  if (state.tagDatas[tag].isFetching) {
+    return false;
+  }
   return false;
 };
 

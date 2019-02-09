@@ -1,30 +1,49 @@
 import React from 'react';
 import styled from 'styled-components';
 import Head from './Head';
-import Date from './Date';
+import LastUpdate from './LastUpdate';
 import RefreshLink from './RefreshLink';
 import Details from './Details';
+import { refreshTagData, fetchTagDataIfNeeded } from '../actions';
 
-const TagDetails = ({ selectedTag, isFetching, isError, lastUpdate, responseData, onClick }) => {
+const TagDetails = ({ selectedTag, tagDatas, dispatch }) => {
+  const selectedTagData = tagDatas[selectedTag];
+  if (!selectedTagData) {
+    return null;
+  }
+  const { isError, isFetching, lastUpdate, responseData } = selectedTagData;
+  const onRefresh = () => {
+    dispatch(refreshTagData(selectedTag));
+    dispatch(fetchTagDataIfNeeded(selectedTag));
+  };
+  const hasResponseData = Object.keys(responseData).length > 0;
+
   return (
     <Wrapper>
       <Head tag={selectedTag} />
+      {isFetching && !hasResponseData &&
+        <Message>Now loading...</Message>
+      }
       {isError.status && 
-        <ErrorText>{isError.error}</ErrorText>
+        <Message error>{isError.error.message}</Message>
       }
       <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-        <Date lastUpdate={lastUpdate} />
-        <RefreshLink onClick={onClick} />
-        <Details {...responseData} />
+        {lastUpdate && 
+          <LastUpdate lastUpdate={lastUpdate} />
+        }
+        <RefreshLink onClick={onRefresh} />
+        {hasResponseData &&
+          <Details {...responseData} />
+        }
       </div>
     </Wrapper>
   );
 };
 
-const ErrorText = styled.p`
-  color: #e00;
+const Wrapper = styled.div``;
+const Message = styled.p`
+  color: ${props => props.error ? '#e00' : null};
 `;
 
-const Wrapper = styled.div``;
 
 export default TagDetails;
