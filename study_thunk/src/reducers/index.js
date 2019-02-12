@@ -96,6 +96,10 @@ function tagData(state = {
       return {
         ...state,
         isFetching: false,
+        isError: {
+          status: false,
+          error: null
+        },
         lastUpdate: Date.now(),
         responseData: action.payload.response
       };
