@@ -12,7 +12,8 @@ const TagDetails = ({ selectedTag, tagDatas, dispatch }) => {
     return null;
   }
   const { isError, isFetching, lastUpdate, responseData } = selectedTagData;
-  const onRefresh = () => {
+  const onRefresh = (e) => {
+    e.preventDefault();
     dispatch(refreshTagData(selectedTag));
     dispatch(fetchTagDataIfNeeded(selectedTag));
   };
